@@ -5,3 +5,4 @@
 Finerp/Finerp-web/obj/
 Finerp/Finerp-web/bin/
 
+*.cache
