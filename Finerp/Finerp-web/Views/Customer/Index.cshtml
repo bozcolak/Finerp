@@ -23,7 +23,7 @@
                   @foreach (var customer in Model)
                     {
                         <tr>
-                            <td>@customer.CustomerId</td>
+                          <td><a href="/Customer/Detail?customerId=@customer.CustomerId"> @customer.CustomerId</a></td>
                             <td>@customer.name</td>
                             <td>@customer.description</td>
                         </tr>

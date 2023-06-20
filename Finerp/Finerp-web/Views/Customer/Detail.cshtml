@@ -1,0 +1,42 @@
+@model Finerp_web.Data.Customers.Customer
+
+
+<form method="post" name="customerForm" action="@Url.Action("Detail", "Customer")">
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">ID</label>
+        <div class="col-sm-10">
+            <input type="hidden" class="form-control" value="@Model.CustomerId" name="CustomerId">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="inputText" class="col-sm-2 col-form-label">İsim</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" value="@Model.name" name="name">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="inputText" class="col-sm-2 col-form-label">Açıklama</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" value="@Model.description" name="description">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+            <button type="button" class="btn btn-danger" onclick="confirmDelete()">Sil</button>
+        </div>
+
+    </div>
+
+</form><!-- End General Form Elements -->
+<script>
+        function confirmDelete() {
+            if (confirm('Bu kaydı silmek istediğinize emin misiniz?')) {
+               var customerForm = document.getElementsByName('customerForm')[0];
+                   customerForm.action = '@Url.Action("Delete", "Customer")';
+                   customerForm.submit();
+            }
+        }
+    </script>
