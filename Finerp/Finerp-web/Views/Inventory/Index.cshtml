@@ -1,0 +1,42 @@
+@model List<Finerp_web.Data.Inventories.Inventory>
+
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Envanter Listesi</h5>
+
+
+                    <!-- Table with stripped rows -->
+                    <table class="table datatable">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Adı</th>
+                            <th scope="col">Açıklama</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var Inventory in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="/Inventory/Detail?inventoryId=@Inventory.InventoryId"> @Inventory.InventoryId</a>
+                                </td>
+                                <td>@Inventory.name</td>
+                                <td>@Inventory.description</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                    <!-- End Table with stripped rows -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

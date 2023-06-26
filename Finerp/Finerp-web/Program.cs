@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Finerp_web.Data;
 using Finerp_web.Data.Customers;
+using Finerp_web.Data.Inventories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<CustomerRepository>();
+builder.Services.AddScoped<InventoryRepository>();
 
 var app = builder.Build();
 
