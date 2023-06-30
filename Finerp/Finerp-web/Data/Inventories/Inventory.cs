@@ -1,3 +1,5 @@
+using FluentValidation;
+
 namespace Finerp_web.Data.Inventories;
 
 public class Inventory
@@ -19,5 +21,12 @@ public class Inventory
         }
 
         return null;
+    }
+    public class InventoryValidator :AbstractValidator<Inventory>
+    {
+        public InventoryValidator()
+        {
+            RuleFor(x => x.name).Length(0,255);
+        }
     }
 }

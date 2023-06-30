@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Finerp_web.Data;
 using Finerp_web.Data.Customers;
 using Finerp_web.Data.Inventories;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<CustomerRepository>();
 builder.Services.AddScoped<InventoryRepository>();
+
+builder.Services.AddScoped<IValidator<Inventory>, Inventory.InventoryValidator>();
 
 var app = builder.Build();
 

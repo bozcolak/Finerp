@@ -1,4 +1,6 @@
+using System.ComponentModel.DataAnnotations;
 using Finerp_web.Data.Inventories;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Finerp_web.Controllers;
@@ -6,10 +8,12 @@ namespace Finerp_web.Controllers;
 public class InventoryController : Controller
 {
     private readonly InventoryRepository _inventoryRepository;
+    private readonly IValidator<Inventory> _inventoryValidator;
 
-    public InventoryController(InventoryRepository inventoryRepository)
+    public InventoryController(InventoryRepository inventoryRepository, IValidator<Inventory> inventoryValidator)
     {
         _inventoryRepository = inventoryRepository;
+        _inventoryValidator = inventoryValidator;
     }
 
     public IActionResult Index()
@@ -29,6 +33,16 @@ public class InventoryController : Controller
     [HttpPost]
     public IActionResult Detail(Inventory inventory, IFormFile photo)
     {
+        var validation =   _inventoryValidator.Validate(inventory);
+        
+        if(validation.IsValid == false)
+        {
+            foreach (var error in validation.Errors)
+            {
+                ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                return View("Detail", inventory);
+            }
+        }
         if (photo != null)
         {
             using (var memoryStream = new MemoryStream())
@@ -63,4 +77,5 @@ public class InventoryController : Controller
             RedirectToAction(
                 "Index"); // İşlem tamamlandıktan sonra yönlendirme yapılabilir, örneğin Index sayfasına yönlendirme yapılıyor.
     }
-}
+    
+} 
